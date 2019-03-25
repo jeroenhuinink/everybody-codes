@@ -28,7 +28,7 @@ export function parse(line: string): ICamera | null {
   // this yields the id
   const id = matches[1];
 
-  // do so type conversions before we return the result
+  // do some type conversions before we return the result
   return {
     id: +id,
     name,
