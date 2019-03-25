@@ -7,7 +7,7 @@
     "test": "jest --coverage --config ./jest.config.json",
     "start": "node dist/index.js",
     "compile": "tsc --project ./tsconfig.json --pretty",
-    "lint": "tslint --project ./tsconfig.json --config ./tslint.json src/**/*.ts"
+    "lint": "tslint --project ./tsconfig.json --config ./tslint.json code/**/*.ts"
   },
   "repository": {
     "type": "git",

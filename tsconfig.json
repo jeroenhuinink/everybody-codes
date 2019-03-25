@@ -30,6 +30,6 @@
     "noFallthroughCasesInSwitch": true /* Report errors for fallthrough cases in switch statement. */ ,
 
   },
-  "include": ["src/**/*"],
+  "include": ["code/**/*"],
   "exclude": ["node_modules", "lib"],
 }

@@ -22,7 +22,7 @@
       "statements": -1000
     }
   },
-  "roots": ["<rootDir>/src/"],
+  "roots": ["<rootDir>/code/"],
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
   "transform": {
     "^.+\\.tsx?$": "ts-jest"
