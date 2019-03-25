@@ -16,8 +16,11 @@ async function start() {
       res.end();
     }
 
-    function servePage() {
-      fs.readFile("./code/index.html", (err, data) => {
+    function servePage(url?: string) {
+      const filename =
+        !url || url === "/" ? "./code/index.html" : `./code${url}`;
+
+      fs.readFile(filename, (err, data) => {
         if (err || !data) {
           console.error(err);
           res.writeHead(500);
@@ -34,19 +37,17 @@ async function start() {
       });
     }
 
-    function serveError() {
-      res.writeHead(404);
-      res.end();
-    }
+    // function serveError() {
+    //   res.writeHead(404);
+    //   res.end();
+    // }
 
     console.debug(req.url);
 
     if (req.url === "/api") {
       serveApi();
-    } else if (req.url === "/") {
-      servePage();
     } else {
-      serveError();
+      servePage(req.url);
     }
   });
 
