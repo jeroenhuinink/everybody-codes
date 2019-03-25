@@ -103,9 +103,12 @@
       height: 500px;
       width: 100%;
     }
+
+    .highlight {
+      background-color: yellow;
+    }
   </style>
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="main.js"></script>
 </head>
 
 <body>
@@ -191,6 +194,90 @@
       </tbody>
     </table>
   </main>
+  <script>
+    let map;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: 52.09,
+          lng: 5.11
+        },
+        zoom: 12
+      });
+
+      $.get('/api', (data) => {
+        data.map(camera => {
+          const {
+            id,
+            name,
+            latitude,
+            longitude
+          } = camera;
+          addToColumn(id, name, latitude, longitude);
+          addMarker(id, name, latitude, longitude);
+        });
+      });
+    }
+
+    const column3 = $("#column3");
+    const column5 = $("#column5");
+    const column15 = $("#column15");
+    const columnOther = $("#columnOther");
+
+    function addToColumn(id, name, latitude, longitude) {
+      const row = `<tr id="${id}">
+  <td>${id}</td>
+  <td>${name}</td>
+  <td>${latitude}</td>
+  <td>${longitude}</td>
+</tr>`;
+
+      if (DivisbleByThree(id) && !DivisibleByFive(id)) {
+        $(row).appendTo(column3);
+      } else if (DivisibleByFive(id) && !DivisbleByThree(id)) {
+        $(row).appendTo(column5);
+      } else if (DivisbleByThree(id) && DivisibleByFive(id)) {
+        $(row).appendTo(column15);
+      } else {
+        $(row).appendTo(columnOther);
+      }
+    }
+
+    function addMarker(id, name, latitude, longitude) {
+      const infowindow = new google.maps.InfoWindow({
+        content: `<div>
+  <h1>${id}</h1>
+  <p>${name}</p>
+</div>`
+      });
+
+      const marker = new google.maps.Marker({
+        position: {
+          lat: latitude,
+          lng: longitude
+        },
+        map: map,
+        title: name
+      });
+
+      marker.addListener('click', function () {
+        infowindow.open(map, marker);
+        $(".highlight").removeClass("highlight");
+        $(`#${id}`).addClass("highlight");
+      });
+    }
+    
+    function DivisbleByThree(id) {
+      return id % 3 === 0;
+    }
+
+    function DivisibleByFive(id) {
+      return id % 5 === 0;
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCacwFKU-_F4cIOwUDe8g_-FW6xN9TZU4&callback=initMap"
+    async defer></script>
 </body>
 
 </html>
