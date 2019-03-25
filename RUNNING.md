@@ -5,7 +5,7 @@ Run de volgende commando's:
 ```sh
 npm install
 npm run compile
-node dist/index.js
+npm run start
 ```
 
 Open nu de browser op `http://localhost:3000`.
