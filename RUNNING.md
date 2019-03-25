@@ -1,5 +1,15 @@
 # Hoe de code te runnen
 
+## CLI
+
+```sh
+npm install
+npm run compile
+node dist/search.js --name <name>
+```
+
+## REST API en web app
+
 Run de volgende commando's:
 
 ```sh

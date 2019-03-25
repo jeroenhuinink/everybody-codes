@@ -13,11 +13,13 @@ async function start(name: string) {
 
 // For the time being very primitive commandline parsing
 if (process.argv.length !== 4) {
-  console.error("Wrong number of arguments.\nUsage: node cli.js --name <name>");
+  console.error(
+    "Wrong number of arguments.\nUsage: node dist/search.js --name <name>"
+  );
   process.exit(1);
 }
 if (process.argv[2] !== "--name") {
-  console.error("Wrong arguments.\nUsage: node cli.js --name <name>");
+  console.error("Wrong arguments.\nUsage: node dist/search.js --name <name>");
   process.exit(1);
 }
 
